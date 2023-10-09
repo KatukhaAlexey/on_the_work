@@ -119,8 +119,8 @@ class Example:
         self.a = 1
         self._b = 2
         self.__c = 3
-        print ('{}{}{}'.format(self.a, self_b, self.__c))
-    def call(self)
+        print ('{}{}{}'.format(self.a, self._b, self.__c))
+    def call(self):
         print('Called!')
 example = Example()
 print('example.a')
@@ -131,3 +131,18 @@ except AttributeError as ex:
     print(ex)
 
 # ПОЛИМОРФИЗМ. Позволяет использовать функции по разному, вне зависимости от типа их параметров.
+
+class Parent:
+    def call(self):
+        print('Parent')
+class Child(Parent):
+    def call(self):
+        print('Child')
+class Example:
+    def call(self):
+        print('Ex')
+
+def call_obj(obj):
+    obj.call()
+call_obj(Child())
+call_obj(Parent())
