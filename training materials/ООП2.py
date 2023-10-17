@@ -9,6 +9,7 @@
 # delattr(Point, 'prop') - удаляет указанный атрибут
 
 class Lamp:
+    '''Класс лампочка'''
     brand = 'Phillips' # Атрибут класса
     count = 0 # Можно подсчитывать количество лампочек
     def __init__(self, floor=0): # ИНИЦИАЛИЗАТОР
@@ -42,3 +43,4 @@ class Lamp:
 
 lamp1 = Lamp(1)
 print(lamp1.state)
+print(Lamp.__doc__)
