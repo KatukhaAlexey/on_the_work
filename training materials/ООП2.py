@@ -8,6 +8,39 @@
 # hassttr(Point, 'prop') - проверяет наличие атрибута
 # delattr(Point, 'prop') - удаляет указанный атрибут
 
+# При создании объекта сначала вызывается метод __new__, а затем произсходит инициализация объекта (метод __init__)
+# cls в __new__ ссылается на класс
+# Финализатор класса __del__(self) автоматически вызывается перед уничтожением экземпляра класса
+# Сборщик мусора определяет, какие объекты не нужны и решает их удалить из памяти. Перед этим вызывается метод __del__
+# 
+
+class Point:
+    color = 'red'
+    circle = 2
+
+    def __new__(cls, *args, **kwargs):
+        print('Вызов метода __new__ для ' + str(cls))
+        return super().__new__(cls) # Базовый класс super()
+
+    def __init__(self, x=0, y=0):
+        self.x = x
+        self.y = y
+
+    def __del__(self):
+        print('Удаление экземпляра: ' + str(self))
+
+    def set_coords(self, x, y):  # метод передает значения экземпляру класса
+        self.x = x
+        self.y = y
+
+    def get_coords(self):  # метод возвращает значение атрибутов экземпляра класса
+        return self.x, self.y
+
+
+pt = Point(1, 2)
+print(pt.__dict__) # печать перечня атрибутов экземпляра класса
+
+
 class Lamp:
     '''Класс лампочка'''
     brand = 'Phillips' # Атрибут класса
@@ -41,6 +74,6 @@ class Lamp:
     def __repr__(self):
         return f'Я - лампочка на {self.floor} этаже'
 
-lamp1 = Lamp(1)
-print(lamp1.state)
-print(Lamp.__doc__)
+#lamp1 = Lamp(1)
+#print(lamp1.state)
+#print(Lamp.__doc__)

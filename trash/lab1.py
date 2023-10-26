@@ -1,21 +1,9 @@
-import random
-# Случайным образом прячем приз за одну из трёх дверей
-i = 0
-ver = 0
-while i<100:
-    # Случайным образом выбираем одну из трёх дверей
-    vibor = int(random.randrange(1,4))
-    print(f'Выбор игрока: дверь №{vibor}')
-    # Так же случайным образом определяем за какой из трёх дверей находится приз
-    priz = int(random.randrange(1,4))
-    print(f'Приз за дверью №{priz}')
-    # Далее нужно случайным образом нужно выбрать дверь, за которой приза нет.
-    # Если вдруг выберем дверь с призом, нужно выбрать заново, и снова проверить
-    nopriz = int(random.randrange(1,4))
-    while priz == nopriz : nopriz = int(random.randrange(1,4))
-    print(f'За дверью №{nopriz} приза нет')
-    # Если первоначальный выбор не совпал с призом (т.е. выбор был изменен), то ведем подсчет таких случаев
-    if vibor != priz:
-        ver+=1
-    i+=1
-print(f'Если выбор проводился 100 раз, то вероятность выиграть приз изменив свой выбор составила: {ver}%')
+word = input()
+lst = list(word)
+centr = int(len(lst) // 2)
+if lst[:centr] == lst[len(lst):centr:-1]:
+    print('Да')
+else:
+    print('Нет')
+    print(lst[:centr])
+    print(lst[len(lst):centr:-1])
