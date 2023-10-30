@@ -41,3 +41,11 @@
 #print(f"Сдача:{' ' * st5}{cash_out}")
 #print('=' * 35)
 
+n = int(input())
+kol = 1
+t = 0
+while t < n:
+    if t % 3 == 0 and t != 0:
+        kol *= 2
+    t += 1
+print(kol)
