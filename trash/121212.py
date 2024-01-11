@@ -1,19 +1,41 @@
-def backward_string_by_word(text: str) -> str:
-    list_of_text = text.split(' ')
-    new_text = ''
-    len_of_list = len(list_of_text)
-    if list_of_text[0] != '':
-        new_text = f' {str(reversed(list_of_text[0]))}'
-    else:
-        for i in list_of_text[1:len_of_list - 1]:
-            if i != '':
-                new_text = f' {str(reversed(i))}'
-            else:
-                new_text = f' {i}'
-    return str(new_text)
+import requests
+from pprint import pprint
+import os
 
-print(backward_string_by_word(""))
-print(backward_string_by_word("world"))
-print(backward_string_by_word("hello world"))
-print(backward_string_by_word("hello   world"))
-print(backward_string_by_word("welcome to a game"))
+
+with open('vk_token_id.txt', 'r') as f:
+    vk_token = f.readline().strip()
+    vk_user_id = f.readline().strip()
+
+
+class vk_api_client:
+    api_base_url = 'https://api.vk.com/method/'
+
+    def __init__(self, vk_token, vk_user_id):
+        self.vk_token = vk_token
+        self.vk_user_id = vk_user_id
+    def get_params(self):
+        return {
+            'access_token': self.vk_token,
+            'v': '5.131'
+        }
+
+    def _build_url(self, api_method):
+        return f'{self.api_base_url}/{api_method}'
+
+
+    def get_photos(self):
+        params = self.get_params()
+        params.update({'owner_id': self.vk_user_id, 'album_id': 'profile'})
+        response = requests.get(self._build_url('photos.get'), params=params)
+        response = response.json()
+
+
+        return response
+
+
+if __name__ == '__main__':
+
+    vk_client = vk_api_client(vk_token, vk_user_id)
+
+    pprint(vk_client.get_photos(), sort_dicts=False, width=100)
