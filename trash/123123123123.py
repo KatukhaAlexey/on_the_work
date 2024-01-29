@@ -116,26 +116,3 @@
 #print(*tr.translate('car'))
 
 
-class TriangleChecker:
-    def __init__(self, a, b, c):
-        self.a = a
-        self.b = b
-        self.c = c
-        
-    def is_triangle(self, a, b, c):
-        print(type(a))
-        if type(a) in (int, float) and type(b) in (int, float) and type(c) in (int, float):
-            if a <= 0 or b <= 0 or c <= 0:
-                return 1
-            elif a >= c + b or b >= a + c or c >= a + b:
-                return 2
-            else:
-                return 3
-        else:
-            return 1
-
-a, b, c = map(int, input().split()) # эту строчку не менять
-
-tr = TriangleChecker(a, b, c)
-print(tr.is_triangle(a, b, c))
-print(tr.is_triangle('3', 4, 5))
